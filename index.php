@@ -1,5 +1,16 @@
 <?php
-
+include 'db.php';
+if($_SERVER ['REQUEST_METHOD']==='POST'){
+    $task_name = $_POST['task_name'];
+    if(!empty($task_name)){
+        $stmt = $conn->prepare("INSERT INTO Tasks(task_name)VALUES (?)");
+        $stmt->bind_param('s',$task_name);
+        $stmt->execute();
+        $stmt->close();
+    }
+}
+ $open_tasks = $conn->query("SELECT * FROM tasks WHERE is_completed=0");
+ $closed_tasks = $conn->query("SELECT * FROM tasks where is_completed=1");
 
 ?>
 
@@ -27,12 +38,18 @@
             <div class="col-md-6">
                 <h2 class="text-center">Open Tasks</h2>
                 <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <?php if($open_tasks->num_rows > 0 ): ?>
+                    <?php while($row = $open_tasks->fetch_assoc()): ?>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <?php echo $row['task_name']; ?>
                         <div>
-
                             <a href="delete_task.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
                             <a href="complete_task.php?id=<?php echo $row['id']; ?>" class="btn btn-success">Complete</a>
                         </div>
+                    <?php endwhile; ?>
+                    <?php else : ?>
+                    <li class="list-group_item">No Open Tasks Found.</li>    
+                    <?php endif ?>
                     </li>
                 </ul>
             </div>
