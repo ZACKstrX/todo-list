@@ -8,6 +8,7 @@ if($_SERVER ['REQUEST_METHOD']==='POST'){
         $stmt->execute();
         $stmt->close();
     }
+        header("location: " .$_SERVER['PHP_SELF']);
 }
  $open_tasks = $conn->query("SELECT * FROM tasks WHERE is_completed=0");
  $closed_tasks = $conn->query("SELECT * FROM tasks where is_completed=1");
@@ -61,7 +62,7 @@ if($_SERVER ['REQUEST_METHOD']==='POST'){
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <?php echo $row['task_name']; ?>
                         <div>
-                            <a href="delete_tasks.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Delete</a>
+                            <a href="delete_tasks.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
                         </div>
                     </li>
                     <?php endwhile; ?>
