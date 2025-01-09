@@ -43,7 +43,7 @@ if($_SERVER ['REQUEST_METHOD']==='POST'){
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <?php echo $row['task_name']; ?>
                         <div>
-                            <a href="delete_task.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
+                            <a href="delete_tasks.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
                             <a href="complete_task.php?id=<?php echo $row['id']; ?>" class="btn btn-success">Complete</a>
                         </div>
                     <?php endwhile; ?>
@@ -61,7 +61,7 @@ if($_SERVER ['REQUEST_METHOD']==='POST'){
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <?php echo $row['task_name']; ?>
                         <div>
-                            <a href="delete_task.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Delete</a>
+                            <a href="delete_tasks.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Delete</a>
                         </div>
                     </li>
                     <?php endwhile; ?>
