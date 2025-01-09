@@ -38,7 +38,7 @@ if($_SERVER ['REQUEST_METHOD']==='POST'){
             <div class="col-md-6">
                 <h2 class="text-center">Open Tasks</h2>
                 <ul class="list-group">
-                    <?php if($open_tasks->num_rows > 0 ): ?>
+                    <?php if($open_tasks->num_rows > 0 ): ?>    
                     <?php while($row = $open_tasks->fetch_assoc()): ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <?php echo $row['task_name']; ?>
@@ -55,12 +55,19 @@ if($_SERVER ['REQUEST_METHOD']==='POST'){
             </div>
             <div class="col-md-6">
                 <h2 class="text-center">closed Tasks</h2>
+                <?php if($closed_tasks ->num_rows >0 ):   ?>
+                    <?php while($row = $closed_tasks->fetch_assoc()): ?>
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <?php echo $row['task_name']; ?>
                         <div>
                             <a href="delete_task.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Delete</a>
                         </div>
                     </li>
+                    <?php endwhile; ?>
+                    <?php else : ?>
+                    <li class="list-group_item">No Closed Tasks Found.</li>    
+                    <?php endif ?>
                 </ul>
             </div>
         </div>
